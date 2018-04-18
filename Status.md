@@ -1,5 +1,9 @@
-[2018-04.16]: Created a Heroku Project, created a lot of Issues 
-regarding Rights, ToDos and Deadlines and opened a PR for merging a 
-basic Web-App for printing a simple "Hello World"
+# State of the Project
 
-[2018-04-10]: Repository Created
+Contains updates about the state of the project (newest at top).
+
+### Week 1
+
+- teambuilding
+- README.md and Status.md
+
