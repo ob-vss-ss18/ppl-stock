@@ -71,8 +71,6 @@ git checkout -b {your branch name}
 
 #### Not using a Fork
 
-First fork the main repository (github.com/ob-vss-ss18/ppl-stock). Now clone:
-
 ```shell
 git clone https://github.com/ob-vss-ss18/ppl-stock.git
 ```
