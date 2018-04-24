@@ -25,7 +25,9 @@ See the other teams [here](https://github.com/ob-vss-ss18/ob-vss-ss18/wiki/Teams
 ### Prerequisites
 
 run ```go get -u github.com/kardianos/govendor``` to install govendor.
-It handles dependencies. See: https://devcenter.heroku.com/articles/go-dependencies-via-govendor
+It will install the dependencies automatically when running ```go install``` See: https://devcenter.heroku.com/articles/go-dependencies-via-govendor
+
+
 
 ### Using `go get`
 
