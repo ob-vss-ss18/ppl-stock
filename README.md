@@ -6,10 +6,10 @@
 
 ## Team
 
-- Michael Eggers
-- Sven Schatter
+- [Michael Eggers](https://github.com/michaeleggers)
+- [Sven Schatter](https://github.com/Ghouz)
 - [Philipp Konopac](https://github.com/konopac/)
-- Jannes Kretschmer
+- [Jannes Kretschmer](https://github.com/janneskretschmer)
 - [Daniel Gabl](http://github.com/DManstrator)
 - [Nico Daßler](https://github.com/truenicfel/)
 
