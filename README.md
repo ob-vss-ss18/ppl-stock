@@ -1,21 +1,27 @@
 # ppl-stock
 
+[![Build Status](https://travis-ci.org/ob-vss-ss18/ppl-stock.svg?branch=master)](https://travis-ci.org/ob-vss-ss18/ppl-stock)
+
 ## Description
 
 ...
 
 ## Team
 
-- Michael Eggers
-- Sven Schatter
+- [Michael Eggers](https://github.com/michaeleggers)
+- [Sven Schatter](https://github.com/Ghouz)
 - [Philipp Konopac](https://github.com/konopac/)
-- Jannes Kretschmer
+- [Jannes Kretschmer](https://github.com/janneskretschmer)
 - [Daniel Gabl](http://github.com/DManstrator)
 - [Nico Daßler](https://github.com/truenicfel/)
 
 See the other teams [here](https://github.com/ob-vss-ss18/ob-vss-ss18/wiki/Teams).
 
 ## Getting Started
+
+### Using `go get`
+
+#### Use a Fork
 
 First fork the main repository (github.com/ob-vss-ss18/ppl-stock). Next clone the forked repository using the `got get`-command:
 
@@ -31,6 +37,56 @@ You can then go ahead and import the project into goland:
 3. *OK*
 
 This is all you need to do.
+
+#### Not using a Fork
+
+```shell
+go get github.com/ob-vss-ss18/ppl-stock
+```
+This will clone the main and place it into your go-folder specified by your `GOPATH` variable (default: ~/go).
+
+You can then go ahead and import the project into goland:
+
+1. *File -> Open*
+2. Search for the newly downloaded git repo: `$GOPATH/src/github.com/ob-vss-ss18/ppl-stock/`
+3. *OK*
+
+This is all you need to do.
+
+
+### Using `git clone`
+
+#### Use a Fork
+
+First fork the main repository (github.com/ob-vss-ss18/ppl-stock). Now clone:
+
+```shell
+git clone https://github.com/{your-git-username}/ppl-stock.git
+```
+
+Remember to create a branch **before** pushing your code.
+
+```shell
+cd ppl-stock
+git checkout -b {your branch name}
+```
+
+#### Not using a Fork
+
+```shell
+git clone https://github.com/ob-vss-ss18/ppl-stock.git
+```
+
+Remember to create a branch **before** pushing your code.
+
+```shell
+cd ppl-stock
+git checkout -b {your branch name}
+```
+
+## [Status.md](https://github.com/ob-vss-ss18/ppl-stock/blob/master/Status.md)
+
+Every tuesday during lab we updated this with all what was done during last week.
 
 ## Guidelines
 
