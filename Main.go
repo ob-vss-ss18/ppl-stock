@@ -20,7 +20,7 @@ func main() {
 	}
 	println("using port: " + port);
 
-	http.HandleFunc("/stock", doMagic)  // map function to address
+	http.HandleFunc("/", doMagic)  // map function to address
 	err := http.ListenAndServe(":" + port, nil) // listen to http port not allowed
 	//err := http.ListenAndServe(":1337", nil) // listen to http port not allowed
 	if err != nil {
