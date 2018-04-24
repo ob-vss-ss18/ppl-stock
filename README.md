@@ -7,7 +7,7 @@
 ...
 
 ### HELLO WORLD
-https://ppl-stock.herokuapp.com/stock
+https://ppl-stock.herokuapp.com/
 
 ## Team
 
