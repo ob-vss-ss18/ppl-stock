@@ -2,17 +2,21 @@
 
 Contains updates about the state of the project (newest at top).
 
-### Week 3
+### Calender Week 20
+
+- updated hello world. You will have to send a query now to receive the hello world message.
+
+### Calender Week ?
 
 - GraphQL Implementation
 - Created Release-Branch and a Heroku App for developing the App (Old App is for releases only now).
 
-### Week 2
+### Calender Week ?
 
 - hello world
 - readme improved
 
-### Week 1
+### Calender Week ?
 
 - teambuilding
 - README.md and Status.md
