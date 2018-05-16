@@ -3,65 +3,70 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"github.com/graphql-go/graphql"
-	"log"
 	"encoding/json"
 )
 
-func doMagic(writer http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(writer, "Hello World!") // send data to client
-	return
-}
-
 func main() {
 
-	GraphQLTest();
+	http.HandleFunc("/graphql", func(httpResponseWriter http.ResponseWriter, httpRequest *http.Request) {
+		// httpRequest.URL.Query().Get("query"):
+		// returns "message" (without the qoutes) for the example below
+		result := executeQuery(httpRequest.URL.Query().Get("query"))
+		json.NewEncoder(httpResponseWriter).Encode(result)
+	})
 
-	// get port from the environment variable (heroku sets this)
-	var port string = os.Getenv("PORT");
-	// or get an default value (e.g. for developing)
-	if port == "" {
-		port = "1337";
-	}
-	println("using port: " + port);
+	fmt.Println("Now server is running on port 8080")
+	fmt.Println("Test with Get      : curl -g 'http://localhost:8080/graphql?query={message}'")
+	http.ListenAndServe(":8080", nil)
 
-	http.HandleFunc("/", doMagic)  // map function to address
-	err := http.ListenAndServe(":" + port, nil) // listen to http port not allowed
-	//err := http.ListenAndServe(":1337", nil) // listen to http port not allowed
-	if err != nil {
-		fmt.Sprintf("An Error occured: %s\n", err) // Housten we have a problem
-	}
 }
 
-func GraphQLTest() {
-	// Schema
-	fields := graphql.Fields{
-		"hello": &graphql.Field{
-			Type: graphql.String,
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				return "world", nil
+/*
+	Create a query object type with field message by using GraphQLObjectTypeConfig:
+		- Name: name of the type to be created
+		- Fields: a map of created by using GraphQLFields
+		(these are the fields that can be requested in a query)
+	We use GraphQLFieldConfig to define/configure the message field:
+		- Type: type of Field (graphgl.String)
+		- Resolve: function which will return the 'Hello World!' message
+ */
+var query = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "Query",
+		Fields: graphql.Fields{
+			"message": &graphql.Field{
+				Type: graphql.String,
+				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+					return "Hello World!", nil
+				},
 			},
 		},
-	}
-	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
-	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
-	schema, err := graphql.NewSchema(schemaConfig)
-	if err != nil {
-		log.Fatalf("failed to create new schema, error: %v", err)
-	}
+	})
 
-	// Query
-	query := `
-		{
-			hello
-		}
-	`
-	params := graphql.Params{Schema: schema, RequestString: query}
-	r := graphql.Do(params)
-	if len(r.Errors) > 0 {
-		log.Fatalf("failed to execute graphql operation, errors: %+v", r.Errors)
+/*
+	Now create a new schema which has the hello world query created above as
+	top level query.
+ */
+var schema, _ = graphql.NewSchema(
+	graphql.SchemaConfig{
+		Query: query,
+	},
+)
+
+
+/*
+	A small function to which will call graphql.Do(), which will handle resolving the
+	request and returns the results.
+ */
+func executeQuery(query string) *graphql.Result {
+	result := graphql.Do(graphql.Params{
+		Schema:        schema,
+		// this variable is set to "message" for the example below
+		RequestString: query,
+	})
+	if len(result.Errors) > 0 {
+		fmt.Printf("wrong result, unexpected errors: %v", result.Errors)
 	}
-	rJSON, _ := json.Marshal(r)
-	fmt.Printf("%s \n", rJSON) // {“data”:{“hello”:”world”}}
+	return result
 }
