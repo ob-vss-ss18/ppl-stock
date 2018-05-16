@@ -6,8 +6,18 @@
 
 ...
 
-### HELLO WORLD
+## HELLO WORLD
 https://ppl-stock.herokuapp.com/
+
+### How to use Hello World?
+
+#### Curl
+
+```shell 
+curl -g ''https://ppl-stock.herokuapp.com:8080/graphql?query={message}'
+```
+
+Expected response: ``` {"data":{"message":"Hello World!"}} ```
 
 ## Team
 
