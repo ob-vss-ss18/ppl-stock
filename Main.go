@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"github.com/graphql-go/graphql"
 	"encoding/json"
+	"io/ioutil"
+	"github.com/ob-vss-ss18/ppl-stock/pplStock"
 )
 
 func main() {
@@ -12,48 +14,22 @@ func main() {
 	http.HandleFunc("/graphql", func(httpResponseWriter http.ResponseWriter, httpRequest *http.Request) {
 		// httpRequest.URL.Query().Get("query"):
 		// returns "message" (without the qoutes) for the example below
-		result := executeQuery(httpRequest.URL.Query().Get("query"))
-		json.NewEncoder(httpResponseWriter).Encode(result)
+		bodyBytes, error := ioutil.ReadAll(httpRequest.Body)
+		if error == nil {
+			bodyString := string(bodyBytes[:len(bodyBytes)])
+			result := executeQuery(bodyString)
+			json.NewEncoder(httpResponseWriter).Encode(result)
+		} else {
+			fmt.Println(error)
+		}
+		httpRequest.Body.Close()
 	})
 
 	fmt.Println("Now server is running on port 8080")
-	fmt.Println("Test with Get      : curl -g 'http://localhost:8080/graphql?query={message}'")
+	fmt.Println("Test with Get      : curl --data 'query{greet(name:\"nico\") message}' http://localhost:8080/graphql")
 	http.ListenAndServe(":8080", nil)
 
 }
-
-/*
-	Create a query object type with field message by using GraphQLObjectTypeConfig:
-		- Name: name of the type to be created
-		- Fields: a map of created by using GraphQLFields
-		(these are the fields that can be requested in a query)
-	We use GraphQLFieldConfig to define/configure the message field:
-		- Type: type of Field (graphgl.String)
-		- Resolve: function which will return the 'Hello World!' message
- */
-var query = graphql.NewObject(
-	graphql.ObjectConfig{
-		Name: "Query",
-		Fields: graphql.Fields{
-			"message": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return "Hello World!", nil
-				},
-			},
-		},
-	})
-
-/*
-	Now create a new schema which has the hello world query created above as
-	top level query.
- */
-var schema, _ = graphql.NewSchema(
-	graphql.SchemaConfig{
-		Query: query,
-	},
-)
-
 
 /*
 	A small function to which will call graphql.Do(), which will handle resolving the
@@ -61,7 +37,7 @@ var schema, _ = graphql.NewSchema(
  */
 func executeQuery(query string) *graphql.Result {
 	result := graphql.Do(graphql.Params{
-		Schema:        schema,
+		Schema: pplStock.PPLStockSchema,
 		// this variable is set to "message" for the example below
 		RequestString: query,
 	})
