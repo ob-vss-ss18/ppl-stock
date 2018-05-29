@@ -1,67 +1,48 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"os"
-	"github.com/graphql-go/graphql"
-	"log"
 	"encoding/json"
+	"fmt"
+	"github.com/graphql-go/graphql"
+	"github.com/ob-vss-ss18/ppl-stock/pplStock"
+	"io/ioutil"
+	"net/http"
 )
-
-func doMagic(writer http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(writer, "Hello World!") // send data to client
-	return
-}
 
 func main() {
 
-	GraphQLTest();
+	http.HandleFunc("/ppl-stock", func(httpResponseWriter http.ResponseWriter, httpRequest *http.Request) {
+		// httpRequest.URL.Query().Get("query"):
+		// returns "message" (without the qoutes) for the example below
+		bodyBytes, error := ioutil.ReadAll(httpRequest.Body)
+		if error == nil {
+			bodyString := string(bodyBytes[:len(bodyBytes)])
+			result := executeQuery(bodyString)
+			json.NewEncoder(httpResponseWriter).Encode(result)
+		} else {
+			fmt.Println(error)
+		}
+		httpRequest.Body.Close()
+	})
 
-	// get port from the environment variable (heroku sets this)
-	var port string = os.Getenv("PORT");
-	// or get an default value (e.g. for developing)
-	if port == "" {
-		port = "1337";
-	}
-	println("using port: " + port);
+	fmt.Println("Now server is running on port 8080")
+	fmt.Println("Curl test: curl --data 'query{ski(id:10){brand id useCase}}' http://localhost:8080/ppl-stock")
+	http.ListenAndServe(":8080", nil)
 
-	http.HandleFunc("/", doMagic)  // map function to address
-	err := http.ListenAndServe(":" + port, nil) // listen to http port not allowed
-	//err := http.ListenAndServe(":1337", nil) // listen to http port not allowed
-	if err != nil {
-		fmt.Sprintf("An Error occured: %s\n", err) // Housten we have a problem
-	}
 }
 
-func GraphQLTest() {
-	// Schema
-	fields := graphql.Fields{
-		"hello": &graphql.Field{
-			Type: graphql.String,
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				return "world", nil
-			},
-		},
+/*
+	A small function to which will call graphql.Do(), which will handle resolving the
+	request and returns the results.
+*/
+func executeQuery(query string) *graphql.Result {
+	result := graphql.Do(graphql.Params{
+		Schema: pplStock.PPLStockSchema,
+		// this variable is set to "message" for the example below
+		RequestString: query,
+	})
+	if len(result.Errors) > 0 {
+		fmt.Printf("wrong result, unexpected errors: %v", result.Errors)
 	}
-	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
-	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
-	schema, err := graphql.NewSchema(schemaConfig)
-	if err != nil {
-		log.Fatalf("failed to create new schema, error: %v", err)
-	}
-
-	// Query
-	query := `
-		{
-			hello
-		}
-	`
-	params := graphql.Params{Schema: schema, RequestString: query}
-	r := graphql.Do(params)
-	if len(r.Errors) > 0 {
-		log.Fatalf("failed to execute graphql operation, errors: %+v", r.Errors)
-	}
-	rJSON, _ := json.Marshal(r)
-	fmt.Printf("%s \n", rJSON) // {“data”:{“hello”:”world”}}
+	return result
 }
