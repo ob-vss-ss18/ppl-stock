@@ -11,31 +11,42 @@ import (
  */
 var PPLStockSchema graphql.Schema
 
-var exampleSki models.Ski
+var exampleSki = models.Ski{
+	Id: 10,
+	Usage: models.Langlauf,
+	Category: models.Beginner,
+	Usertype: models.Erwachsener,
+	Gender: models.Male,
+	Manufactorer: "Fischer",
+	Model: "Super Ski 3000",
+	Length: 2,
+	Bodyheight: 3,
+	Bodyweight: 4,
+	Color: "Rot",
+	PriceNew: 34.99,
+	Condition: models.New,
+	Status: models.Available,
+}
+
+var exampleStick = models.Stick{
+	Id: 5,
+	Usage: models.All_Mountain,
+	Usertype: models.Kinder,
+	Gender: models.Uni,
+	Manufactorer: "Müller",
+	Model: "Super Stick 7000",
+	Length: 25,
+	Bodyheight: 13,
+	Color: "Blau",
+	PriceNew: 14.99,
+	Condition: models.Used,
+	Status: models.Available,
+}
 
 /*
  * Automatically called by go to initialize variables defined here.
  */
 func init() {
-
-	// example data
-	exampleSki = models.Ski{
-		Id: 10,
-		Usage: models.Langlauf,
-		Category: models.Beginner,
-		Usertype: models.Erwachsener,
-		Gender: models.Male,
-		Manufactorer: "Fischer",
-		Model: "Super Ski 3000",
-		Length: 2,
-		Bodyheight: 3,
-		Bodyweight: 4,
-		Color: "Rot",
-		PriceNew: 34.99,
-		Condition: models.New,
-		Status: models.Available,
-	}
-
 	/*
 	 * The query type which will define the fields which can be requested
 	 * from this api. This is basically the definition of the api.
