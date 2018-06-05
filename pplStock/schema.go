@@ -2,6 +2,7 @@ package pplStock
 
 import (
 	"github.com/graphql-go/graphql"
+	"ppl-stock/models"
 )
 
 /*
@@ -10,13 +11,7 @@ import (
  */
 var PPLStockSchema graphql.Schema
 
-type ski struct {
-	id      int
-	useCase string // langlauf, piste, park
-	brand   string // Fischer, Völkl
-}
-
-var exampleSki ski
+var exampleSki models.Ski
 
 /*
  * Automatically called by go to initialize variables defined here.
@@ -24,10 +19,21 @@ var exampleSki ski
 func init() {
 
 	// example data
-	exampleSki = ski{
-		id:      10,
-		useCase: "Langlauf",
-		brand:   "Fischer",
+	exampleSki = models.Ski{
+		Id: 10,
+		Usage: models.Langlauf,
+		Category: models.Beginner,
+		Usertype: models.Erwachsener,
+		Gender: models.Male,
+		Manufactorer: "Fischer",
+		Model: "Super Ski 3000",
+		Length: 2,
+		Bodyheight: 3,
+		Bodyweight: 4,
+		Color: "Rot",
+		PriceNew: 34.99,
+		Condition: models.New,
+		Status: models.Available,
 	}
 
 	/*
@@ -37,33 +43,144 @@ func init() {
 	skiType := graphql.NewObject(graphql.ObjectConfig{
 		Name:        "Ski",
 		Description: "A ski.",
+
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
 				Type:        graphql.NewNonNull(graphql.Int),
 				Description: "The id of the ski",
 				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
-					if ski, ok := parameter.Source.(ski); ok {
-						return ski.id, nil
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Id, nil
 					}
 					return nil, nil
 				},
 			},
-			"useCase": &graphql.Field{
-				Type:        graphql.String,
-				Description: "The useCase (Langlauf, Piste, Park) of the ski.",
+			"usage": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The use case of the ski",
 				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
-					if ski, ok := parameter.Source.(ski); ok {
-						return ski.useCase, nil
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Usage, nil
 					}
 					return nil, nil
 				},
 			},
-			"brand": &graphql.Field{
-				Type:        graphql.String,
-				Description: "The brand of the ski.",
+			"category": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The category of the ski",
 				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
-					if ski, ok := parameter.Source.(ski); ok {
-						return ski.brand, nil
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Category, nil
+					}
+					return nil, nil
+				},
+			},
+			"usertype": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The usertype of the ski",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Usertype, nil
+					}
+					return nil, nil
+				},
+			},
+			"gender": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The gender by which the ski is intended to be used.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Gender, nil
+					}
+					return nil, nil
+				},
+			},
+			"manufactorer": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The manufactorer of the ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Manufactorer, nil
+					}
+					return nil, nil
+				},
+			},
+			"model": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The model of the ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Model, nil
+					}
+					return nil, nil
+				},
+			},
+			"length": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.Int),
+				Description: "The length of the ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Length, nil
+					}
+					return nil, nil
+				},
+			},
+			"bodyheight": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.Int),
+				Description: "The best bodyheight for using this ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Bodyheight, nil
+					}
+					return nil, nil
+				},
+			},
+			"bodyweight": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.Int),
+				Description: "The best bodyweight for using this ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Bodyweight, nil
+					}
+					return nil, nil
+				},
+			},
+			"color": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The color of the ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Color, nil
+					}
+					return nil, nil
+				},
+			},
+			"price_new": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.Float),
+				Description: "The new price of the ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.PriceNew, nil
+					}
+					return nil, nil
+				},
+			},
+			"condition": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The condition of the ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Condition, nil
+					}
+					return nil, nil
+				},
+			},
+			"availability": &graphql.Field{
+				Type:        graphql.NewNonNull(graphql.String),
+				Description: "The status/availability of the ski.",
+				Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+					if ski, ok := parameter.Source.(models.Ski); ok {
+						return ski.Status, nil
 					}
 					return nil, nil
 				},
@@ -115,12 +232,13 @@ func init() {
 	)
 
 }
+
 /*
  * Dummy method this could load a ski given by id from a database.
  */
-func loadSkiFromDatabase(id int) ski {
-	result := ski{}
-	if (exampleSki.id == id) {
+func loadSkiFromDatabase(id int) models.Ski {
+	result := models.Ski{}
+	if exampleSki.Id == uint32(id) {
 		result = exampleSki
 	}
 	return result
