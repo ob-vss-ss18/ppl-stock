@@ -26,7 +26,7 @@ func main() {
 	})
 
 	fmt.Println("Now server is running on port 8080")
-	fmt.Println("Curl test: curl --data 'query{Ski(id:10){brand id useCase}}' http://localhost:8080/graphql")
+	fmt.Println("Curl test: curl --data 'query{Ski(id:10){id gender category length price_new}}' http://localhost:8080/graphql")
 	http.ListenAndServe(":8080", nil)
 
 }
