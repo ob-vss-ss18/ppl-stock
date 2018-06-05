@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	http.HandleFunc("/ppl-stock", func(httpResponseWriter http.ResponseWriter, httpRequest *http.Request) {
+	http.HandleFunc("/graphql", func(httpResponseWriter http.ResponseWriter, httpRequest *http.Request) {
 		// httpRequest.URL.Query().Get("query"):
 		// returns "message" (without the qoutes) for the example below
 		bodyBytes, error := ioutil.ReadAll(httpRequest.Body)
@@ -26,7 +26,7 @@ func main() {
 	})
 
 	fmt.Println("Now server is running on port 8080")
-	fmt.Println("Curl test: curl --data 'query{ski(id:10){brand id useCase}}' http://localhost:8080/ppl-stock")
+	fmt.Println("Curl test: curl --data 'query{Ski(id:10){brand id useCase}}' http://localhost:8080/graphql")
 	http.ListenAndServe(":8080", nil)
 
 }

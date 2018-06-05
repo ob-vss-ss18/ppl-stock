@@ -89,7 +89,7 @@ func init() {
 				 * a local struct. That is why there is a method called "loadSkiFrom
 				 * Database".
 				 */
-				"ski": &graphql.Field{
+				"Ski": &graphql.Field{
 					Type: skiType,
 					Args: graphql.FieldConfigArgument{
 						"id": &graphql.ArgumentConfig{
