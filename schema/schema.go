@@ -77,6 +77,19 @@ func init() {
 						return loadSkiFromDatabase(parameter.Args["id"].(int)), nil
 					},
 				},
+
+				"Stick": &graphql.Field{
+					Type: stickType,
+					Args: graphql.FieldConfigArgument{
+						"id": &graphql.ArgumentConfig{
+							Description: "Id of the requested stick.",
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+					},
+					Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+						return loadStickFromDatabase(parameter.Args["id"].(int)), nil
+					},
+				},
 			},
 		})
 
@@ -102,3 +115,12 @@ func loadSkiFromDatabase(id int) models.Ski {
 	}
 	return result
 }
+
+func loadStickFromDatabase(id int) models.Stick {
+	result := models.Stick{}
+	if exampleStick.Id == uint32(id) {
+		result = exampleStick
+	}
+	return result
+}
+
