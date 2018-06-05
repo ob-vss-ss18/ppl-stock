@@ -1,4 +1,4 @@
-package pplStock
+package schema
 
 import (
 	"github.com/graphql-go/graphql"
