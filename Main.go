@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/graphql-go/graphql"
-	"ppl-stock/pplStock"
+	"github.com/ob-vss-ss18/ppl-stock/schema"
 	"io/ioutil"
 	"net/http"
 )
@@ -37,7 +37,7 @@ func main() {
 */
 func executeQuery(query string) *graphql.Result {
 	result := graphql.Do(graphql.Params{
-		Schema: pplStock.PPLStockSchema,
+		Schema: schema.PPLStockSchema,
 		// this variable is set to "message" for the example below
 		RequestString: query,
 	})

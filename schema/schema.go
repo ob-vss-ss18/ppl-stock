@@ -1,8 +1,8 @@
-package pplStock
+package schema
 
 import (
 	"github.com/graphql-go/graphql"
-	"ppl-stock/models"
+	"github.com/ob-vss-ss18/ppl-stock/models"
 )
 
 /*
