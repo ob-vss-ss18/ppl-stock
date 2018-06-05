@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/graphql-go/graphql"
-	"github.com/ob-vss-ss18/ppl-stock/pplStock"
+	"ppl-stock/pplStock"
 	"io/ioutil"
 	"net/http"
 )
@@ -16,7 +16,7 @@ func main() {
 		// returns "message" (without the qoutes) for the example below
 		bodyBytes, error := ioutil.ReadAll(httpRequest.Body)
 		if error == nil {
-			bodyString := string(bodyBytes[:len(bodyBytes)])
+			bodyString := string(bodyBytes[:])
 			result := executeQuery(bodyString)
 			json.NewEncoder(httpResponseWriter).Encode(result)
 		} else {
