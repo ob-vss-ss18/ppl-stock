@@ -6,7 +6,7 @@ import (
 	"github.com/graphql-go/graphql"
 	"io/ioutil"
 	"net/http"
-	"ppl-stock/schema"
+	"github.com/ob-vss-ss18/ppl-stock/schema"
 )
 
 func main() {
