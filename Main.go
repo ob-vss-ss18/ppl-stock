@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/graphql-go/graphql"
-	"ppl-stock/pplStock"
+	"github.com/ob-vss-ss18/ppl-stock/pplStock"
 	"io/ioutil"
 	"net/http"
 )
