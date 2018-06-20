@@ -37,6 +37,7 @@ var exampleStick = models.Stick{
 	Model:        "Super Stick 7000",
 	Length:       25,
 	Bodyheight:   13,
+	GripKind:     "sticky",
 	Color:        "Blau",
 	PriceNew:     14.99,
 	Condition:    models.Used,

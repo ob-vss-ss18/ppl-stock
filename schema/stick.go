@@ -90,6 +90,16 @@ var stickType = graphql.NewObject(graphql.ObjectConfig{
 				return nil, nil
 			},
 		},
+		"grip_kind": &graphql.Field{
+			Type:        graphql.NewNonNull(graphql.String),
+			Description: "The grip_kind of the stick.",
+			Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
+				if ski, ok := parameter.Source.(models.Stick); ok {
+					return ski.GripKind, nil
+				}
+				return nil, nil
+			},
+		},
 		"color": &graphql.Field{
 			Type:        graphql.NewNonNull(graphql.String),
 			Description: "The color of the ski.",

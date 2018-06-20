@@ -66,6 +66,10 @@ func TestSchemaStick(t *testing.T) {
 	if ok != nil {
 		t.Error("Expected nil, got ", ok)
 	}
+	field, ok = stickType.Fields()["grip_kind"].Resolve(parameters)
+	if field != "sticky" {
+		t.Error("Expected sticky, got ", field)
+	}
 	field, ok = stickType.Fields()["color"].Resolve(parameters)
 	if field != "Blau" {
 		t.Error("Expected Blau, got ", field)
@@ -147,6 +151,13 @@ func TestSchemaStickNil(t *testing.T) {
 		t.Error("Expected nil, got ", ok)
 	}
 	field, ok = stickType.Fields()["bodyheight"].Resolve(parameters)
+	if field != nil {
+		t.Error("Expected nil, got ", field)
+	}
+	if ok != nil {
+		t.Error("Expected nil, got ", ok)
+	}
+	field, ok = stickType.Fields()["grip_kind"].Resolve(parameters)
 	if field != nil {
 		t.Error("Expected nil, got ", field)
 	}
