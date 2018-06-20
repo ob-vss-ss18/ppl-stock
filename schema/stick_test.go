@@ -38,7 +38,7 @@ func TestSchemaStick(t *testing.T) {
 	if ok != nil {
 		t.Error("Expected nil, got ", ok)
 	}
-	field, ok = stickType.Fields()["manufactorer"].Resolve(parameters)
+	field, ok = stickType.Fields()["manufacturer"].Resolve(parameters)
 	if field != "Müller" {
 		t.Error("Expected Müller, got ", field)
 	}
@@ -125,7 +125,7 @@ func TestSchemaStickNil(t *testing.T) {
 	if ok != nil {
 		t.Error("Expected nil, got ", ok)
 	}
-	field, ok = stickType.Fields()["manufactorer"].Resolve(parameters)
+	field, ok = stickType.Fields()["manufacturer"].Resolve(parameters)
 	if field != nil {
 		t.Error("Expected nil, got ", field)
 	}

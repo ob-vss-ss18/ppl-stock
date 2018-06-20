@@ -45,7 +45,7 @@ func TestSchemaSki(t *testing.T) {
 	if ok != nil {
 		t.Error("Expected nil, got ", ok)
 	}
-	field, ok = skiType.Fields()["manufactorer"].Resolve(parameters)
+	field, ok = skiType.Fields()["manufacturer"].Resolve(parameters)
 	if field != "Fischer" {
 		t.Error("Expected Fischer, got ", field)
 	}
@@ -146,7 +146,7 @@ func TestSchemaSkiNil(t *testing.T) {
 	if ok != nil {
 		t.Error("Expected nil, got ", ok)
 	}
-	field, ok = skiType.Fields()["manufactorer"].Resolve(parameters)
+	field, ok = skiType.Fields()["manufacturer"].Resolve(parameters)
 	if field != nil {
 		t.Error("Expected nil, got ", field)
 	}

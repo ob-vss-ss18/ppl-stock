@@ -50,12 +50,12 @@ var stickType = graphql.NewObject(graphql.ObjectConfig{
 				return nil, nil
 			},
 		},
-		"manufactorer": &graphql.Field{
+		"manufacturer": &graphql.Field{
 			Type:        graphql.NewNonNull(graphql.String),
-			Description: "The manufactorer of the ski.",
+			Description: "The manufacturer of the ski.",
 			Resolve: func(parameter graphql.ResolveParams) (interface{}, error) {
 				if ski, ok := parameter.Source.(models.Stick); ok {
-					return ski.Manufactorer, nil
+					return ski.Manufacturer, nil
 				}
 				return nil, nil
 			},
