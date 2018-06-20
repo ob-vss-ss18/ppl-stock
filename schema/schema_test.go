@@ -22,8 +22,8 @@ func TestSchemaExampleSki(t *testing.T) {
 	if testSki.Gender != models.Male {
 		t.Error("Expected 'Männlich', got ", testSki.Gender)
 	}
-	if testSki.Manufactorer != "Fischer" {
-		t.Error("Expected 'Fischer', got ", testSki.Manufactorer)
+	if testSki.Manufacturer != "Fischer" {
+		t.Error("Expected 'Fischer', got ", testSki.Manufacturer)
 	}
 	if testSki.Model != "Super Ski 3000" {
 		t.Error("Expected 'Super Ski 3000', got ", testSki.Model)
@@ -66,8 +66,8 @@ func TestSchemaExampleStick(t *testing.T) {
 	if testStick.Gender != models.Uni {
 		t.Error("Expected 'Uni', got ", testStick.Gender)
 	}
-	if testStick.Manufactorer != "Müller" {
-		t.Error("Expected 'Müller', got ", testStick.Manufactorer)
+	if testStick.Manufacturer != "Müller" {
+		t.Error("Expected 'Müller', got ", testStick.Manufacturer)
 	}
 	if testStick.Model != "Super Stick 7000" {
 		t.Error("Expected 'Super Stick 7000', got ", testStick.Model)
